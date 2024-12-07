@@ -11,19 +11,20 @@ on:
       - 'main'
   schedule:
     - cron: "0 1 * * *"
-strategy:
-  matrix:
-    include:
-    - debian-version: bookworm
-    - debian-version: bullseye
-    - debian-version: bookworm-slim
-    - debian-version: bullseye-slim
-    - debian-version: stable
-    - debian-version: stable-slim
+
 
 jobs:
   docker:
     runs-on: debian-latest
+    strategy:
+      matrix:
+        include:
+        - debian-version: bookworm
+        - debian-version: bullseye
+        - debian-version: bookworm-slim
+        - debian-version: bullseye-slim
+        - debian-version: stable
+        - debian-version: stable-slim
     steps:
       - name: Checkout
         uses: actions/checkout@v3
