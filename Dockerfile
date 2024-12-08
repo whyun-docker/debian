@@ -3,10 +3,14 @@ FROM debian:${VERSION}
 
 LABEL maintainer="yunnysunny@gmail.com"
 
-
 # 安装依赖
-RUN sed -i 's/deb.debian.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list \
-  && apt-get update \
+ARG VERSION
+RUN if [ "$VERSION" = "bookworm" ] || [ "$VERSION" = "bookworm-slim" ] ; then \
+    sed -i 's/deb.debian.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list.d/debian.sources; \
+  else \
+    sed -i 's/deb.debian.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list; \
+  fi && \
+  apt-get update \
   && apt-get --no-install-recommends  install tzdata -y \
   && apt-get clean \
   && rm /var/lib/apt/lists/* -rf
