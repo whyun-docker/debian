@@ -5,7 +5,8 @@ LABEL maintainer="yunnysunny@gmail.com"
 
 # 安装依赖
 ARG VERSION
-RUN if [ "$VERSION" = "bookworm" ] || [ "$VERSION" = "bookworm-slim" ] ; then \
+RUN if [ "$VERSION" = "bookworm" ] || [ "$VERSION" = "bookworm-slim" ] || \
+  [ "$VERSION" = "stable" ] || [ "$VERSION" = "stable-slim" ]; then \
     sed -i 's/deb.debian.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list.d/debian.sources; \
   else \
     sed -i 's/deb.debian.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list; \
