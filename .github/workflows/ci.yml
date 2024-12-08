@@ -15,7 +15,7 @@ on:
 
 jobs:
   docker:
-    runs-on: debian-latest
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         include:
